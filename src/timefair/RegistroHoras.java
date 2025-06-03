@@ -1,11 +1,11 @@
 package timefair;
 
 public class RegistroHoras {
-    private int horasTrabajadas;
+    private double horasTrabajadas;
     private int tarifaPorHora;
 
     // Constructor
-    public RegistroHoras(int horasTrabajadas, int tarifaPorHora) {
+    public RegistroHoras(double horasTrabajadas, int tarifaPorHora) {
         this.horasTrabajadas = horasTrabajadas;
         this.tarifaPorHora = tarifaPorHora;
     }
@@ -20,7 +20,7 @@ public class RegistroHoras {
     }
 
     // Getters y Setters (e)
-    public int getHorasTrabajadas() {
+    public double getHorasTrabajadas() {
         return horasTrabajadas;
     }
 

@@ -5,10 +5,10 @@ public class TimeFair {
         Nomina nomina = new Nomina();
 
         Empleado emp1 = new Empleado("Pedro Sánchez", "EMP100", TipoContrato.TIEMPO_COMPLETO);
-        emp1.setTiempoCompleto(2500.0, 400.0);
+        emp1.setTiempoCompleto(2500, 400);
 
         Empleado emp2 = new Empleado("María López", "EMP101", TipoContrato.POR_HORAS);
-        RegistroHoras registro = new RegistroHoras(35, 18.5);
+        RegistroHoras registro = new RegistroHoras(35.5, 18);
         emp2.setRegistroHoras(registro);
 
         nomina.agregarEmpleado(emp1);
