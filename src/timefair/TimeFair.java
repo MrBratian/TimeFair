@@ -1,21 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package timefair;
 
-/**
- *
- * @author Notebook
- */
 public class TimeFair {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Nomina nomina = new Nomina();
+
+        Empleado emp1 = new Empleado("Pedro Sánchez", "EMP100", TipoContrato.TIEMPO_COMPLETO);
+        emp1.setTiempoCompleto(2500.0, 400.0);
+
+        Empleado emp2 = new Empleado("María López", "EMP101", TipoContrato.POR_HORAS);
+        RegistroHoras registro = new RegistroHoras(35, 18.5);
+        emp2.setRegistroHoras(registro);
+
+        nomina.agregarEmpleado(emp1);
+        nomina.agregarEmpleado(emp2);
+
+        nomina.calcularPagos();
     }
-    
 }
