@@ -1,30 +1,32 @@
-package timefair;
+package timefair.registros;
 
-public class RegistroHoras {
+import timefair.interfaces.Calculable;
+import timefair.interfaces.RegistrableAsistencia;
+
+public class RegistroHoras implements Calculable, RegistrableAsistencia {
     private double horasTrabajadas;
-    private int tarifaPorHora;
+    private double tarifaPorHora;
 
-    // Constructor
-    public RegistroHoras(double horasTrabajadas, int tarifaPorHora) {
+    public RegistroHoras(double horasTrabajadas, double tarifaPorHora) {
         this.horasTrabajadas = horasTrabajadas;
         this.tarifaPorHora = tarifaPorHora;
     }
 
-    // Método con lógica (b)
+    @Override
     public double calcularPago() {
         return horasTrabajadas * tarifaPorHora;
     }
 
-    // Método vacío (c)
+    @Override
     public void registrarHoras() {
+        // Implementación pendiente
     }
 
-    // Getters y Setters (e)
     public double getHorasTrabajadas() {
         return horasTrabajadas;
     }
 
-    public void setHorasTrabajadas(int horasTrabajadas) {
+    public void setHorasTrabajadas(double horasTrabajadas) {
         this.horasTrabajadas = horasTrabajadas;
     }
 
@@ -32,7 +34,7 @@ public class RegistroHoras {
         return tarifaPorHora;
     }
 
-    public void setTarifaPorHora(int tarifaPorHora) {
+    public void setTarifaPorHora(double tarifaPorHora) {
         this.tarifaPorHora = tarifaPorHora;
     }
 }
