@@ -9,12 +9,12 @@ package timefair.gui;
  *
  * @author Notebook
  */
-public class EmployeeList extends javax.swing.JPanel {
+public class CalcularNomina extends javax.swing.JPanel {
 
     /**
-     * Creates new form EmployeeList
+     * Creates new form CalcularNomina
      */
-    public EmployeeList() {
+    public CalcularNomina() {
         initComponents();
     }
 
@@ -27,13 +27,15 @@ public class EmployeeList extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonCalcularPago = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonVerRecibo = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButtonCalcularPago.setText("Calcular Pagos");
+        add(jButtonCalcularPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -43,28 +45,21 @@ public class EmployeeList extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Tipo de Contrato", ""
+                "Nombre ", "Monto", "Fecha", "Contrato"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 516, 126));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 350, 110));
 
-        jButton1.setText("editar");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, -1, -1));
-
-        jButton2.setText("ver detalles");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
-
-        jButton3.setText("eliminar");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
+        jButtonVerRecibo.setText("Ver Recibo");
+        add(jButtonVerRecibo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonCalcularPago;
+    private javax.swing.JButton jButtonVerRecibo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

@@ -9,12 +9,12 @@ package timefair.gui;
  *
  * @author Notebook
  */
-public class EmployeeList extends javax.swing.JPanel {
+public class HistorialPagos extends javax.swing.JPanel {
 
     /**
-     * Creates new form EmployeeList
+     * Creates new form HistorialPagosVistaAdmin
      */
-    public EmployeeList() {
+    public HistorialPagos() {
         initComponents();
     }
 
@@ -27,13 +27,21 @@ public class EmployeeList extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 29, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -43,28 +51,29 @@ public class EmployeeList extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Tipo de Contrato", ""
+                "Fecha", "Monto", "Detalles", "Title 4"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 516, 126));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 500, 130));
 
-        jButton1.setText("editar");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, -1, -1));
+        jButton1.setText("Actualizar");
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, -1, -1));
 
-        jButton2.setText("ver detalles");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
-
-        jButton3.setText("eliminar");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
+        jButton2.setText("Ver Recibo");
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here: ocultar para usuario empleado
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

@@ -9,12 +9,12 @@ package timefair.gui;
  *
  * @author Notebook
  */
-public class EmployeeList extends javax.swing.JPanel {
+public class VerSolicitudes extends javax.swing.JPanel {
 
     /**
-     * Creates new form EmployeeList
+     * Creates new form VerSolicitudes
      */
-    public EmployeeList() {
+    public VerSolicitudes() {
         initComponents();
     }
 
@@ -31,7 +31,6 @@ public class EmployeeList extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -43,28 +42,24 @@ public class EmployeeList extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Tipo de Contrato", ""
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 516, 126));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 367, 131));
 
-        jButton1.setText("editar");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, -1, -1));
+        jButton1.setText("Aceptar");
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
 
-        jButton2.setText("ver detalles");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
-
-        jButton3.setText("eliminar");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
+        jButton2.setText("Rechazar");
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
