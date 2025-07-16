@@ -13,6 +13,7 @@ public class Login extends javax.swing.JFrame {
         int ancho = (int) (pantalla.width * 0.8);
         int alto  = (int) (pantalla.height * 0.8);
         this.setSize(ancho, alto);
+        this.setMinimumSize(new Dimension(800, 600)); 
         this.setLocationRelativeTo(null);
     }
 
@@ -24,81 +25,43 @@ public class Login extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
+        java.awt.GridBagConstraints gbc;
 
-        emailField = new javax.swing.JTextField();
-        PasswordField = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        welcomeLabel = new javax.swing.JLabel();
-        emailLabel = new javax.swing.JLabel();
-        passwordLabel = new javax.swing.JLabel();
+        emailField = new javax.swing.JTextField(20);
+        PasswordField = new javax.swing.JPasswordField(20);
+        jButton1 = new javax.swing.JButton("Iniciar sesión");
+        welcomeLabel = new javax.swing.JLabel("BIENVENID@!");
+        emailLabel = new javax.swing.JLabel("Correo Electrónico");
+        passwordLabel = new javax.swing.JLabel("Contraseña");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        emailField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 53;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(46, 7, 0, 0);
-        getContentPane().add(emailField, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 105;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 7, 0, 112);
-        getContentPane().add(PasswordField, gridBagConstraints);
+        gbc = new java.awt.GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new java.awt.Insets(10, 10, 10, 10);
+        gbc.anchor = java.awt.GridBagConstraints.CENTER;
+        getContentPane().add(welcomeLabel, gbc);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 46, 97, 0);
-        getContentPane().add(jButton1, gridBagConstraints);
+        gbc.gridy++;
+        getContentPane().add(emailLabel, gbc);
 
-        welcomeLabel.setText("BIENVENID@!");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 56, 0, 0);
-        getContentPane().add(welcomeLabel, gridBagConstraints);
+        gbc.gridy++;
+        getContentPane().add(emailField, gbc);
 
-        emailLabel.setText("Correo Electronico");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(46, 130, 0, 0);
-        getContentPane().add(emailLabel, gridBagConstraints);
+        gbc.gridy++;
+        getContentPane().add(passwordLabel, gbc);
 
-        passwordLabel.setText("Contraseña");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 130, 0, 0);
-        getContentPane().add(passwordLabel, gridBagConstraints);
+        gbc.gridy++;
+        getContentPane().add(PasswordField, gbc);
+
+        gbc.gridy++;
+        getContentPane().add(jButton1, gbc);
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+}
+
 
     private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
         // TODO add your handling code here:

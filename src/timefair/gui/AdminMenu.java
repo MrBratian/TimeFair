@@ -23,6 +23,7 @@ public class AdminMenu extends javax.swing.JFrame {
         int ancho = (int) (pantalla.width * 0.8);
         int alto  = (int) (pantalla.height * 0.8);
         this.setSize(ancho, alto);
+        this.setMinimumSize(new Dimension(800, 600));
         this.setLocationRelativeTo(null);
     }
 
