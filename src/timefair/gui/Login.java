@@ -1,6 +1,9 @@
 package timefair.gui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 
 public class Login extends javax.swing.JFrame {
 
@@ -68,7 +71,45 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_emailFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String correo = emailField.getText();
+        String contrasena = new String(PasswordField.getPassword());
+
+        if (correo.isEmpty() || contrasena.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos.");
+            return;
+        }
+
+        try {
+            String rutaBD = "jdbc:ucanaccess://TimeFairDB.accdb";
+            Connection conn = DriverManager.getConnection(rutaBD);
+            String sql = "SELECT rol FROM Usuarios WHERE correo=? AND contraseña=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, correo);
+            pst.setString(2, contrasena);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                String rol = rs.getString("rol");
+                JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso como " + rol);
+
+                this.dispose(); // Cierra la ventana de login
+
+                if (rol.equalsIgnoreCase("admin")) {
+                    new AdminMenu().setVisible(true);
+                } else if (rol.equalsIgnoreCase("empleado")) {
+                    new EmployeeMenu().setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Rol no reconocido.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.");
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
