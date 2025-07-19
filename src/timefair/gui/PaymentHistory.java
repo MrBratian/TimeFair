@@ -9,12 +9,12 @@ package timefair.gui;
  *
  * @author Notebook
  */
-public class HistorialPagos extends javax.swing.JPanel {
+public class PaymentHistory extends javax.swing.JPanel {
 
     /**
      * Creates new form HistorialPagosVistaAdmin
      */
-    public HistorialPagos() {
+    public PaymentHistory() {
         initComponents();
     }
 

@@ -4,6 +4,12 @@ import java.awt.*;
 import javax.swing.*;
 
 public class EmployeeMenu extends javax.swing.JFrame {
+    
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new EmployeeMenu().setVisible(true);
+        });
+    }
 
     public EmployeeMenu() {
         initComponents();
@@ -27,15 +33,21 @@ public class EmployeeMenu extends javax.swing.JFrame {
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.weightx = 1;
         gbc.fill = GridBagConstraints.NONE;
-        jLabel1 = new JLabel("Bienvenido de nuevo [USER]");
-        getContentPane().add(jLabel1, gbc);
+        WelcomeLabel = new JLabel("Bienvenido de nuevo [USER]");
+        getContentPane().add(WelcomeLabel, gbc);
 
         // Botón cerrar sesión a la derecha
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         gbc.weightx = 1;
-        jButton3 = new JButton("Cerrar sesión");
-        getContentPane().add(jButton3, gbc);
+        LogOutButton = new JButton("Cerrar sesión");
+        getContentPane().add(LogOutButton, gbc);
+        
+        LogOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogOutButtonActionPerformed(evt);
+            }
+        });
 
         // Reset de constraints para lo demás
         gbc.gridx = 0;
@@ -45,16 +57,16 @@ public class EmployeeMenu extends javax.swing.JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
 
-        jLabel2 = new JLabel("Tu info personal:");
-        getContentPane().add(jLabel2, gbc);
+        YourPersonalInfoLabel = new JLabel("Tu info personal:");
+        getContentPane().add(YourPersonalInfoLabel, gbc);
 
         gbc.gridy++;
-        jButton1 = new JButton("Ver historial de pagos");
-        getContentPane().add(jButton1, gbc);
+        ViewPaymentsButton = new JButton("Ver historial de pagos");
+        getContentPane().add(ViewPaymentsButton, gbc);
 
         gbc.gridy++;
-        jButton2 = new JButton("Solicitar vacaciones o licencias");
-        getContentPane().add(jButton2, gbc);
+        RequestButton = new JButton("Solicitar vacaciones o licencias");
+        getContentPane().add(RequestButton, gbc);
 
         // Espaciado inferior para empujar hacia arriba todo
         gbc.gridy++;
@@ -63,16 +75,17 @@ public class EmployeeMenu extends javax.swing.JFrame {
 
         pack();
     }
-
-    public static void main(String args[]) {
+    
+    private void LogOutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        dispose();
         SwingUtilities.invokeLater(() -> {
-            new EmployeeMenu().setVisible(true);
+            new Login().setVisible(true);
         });
     }
 
-    private JButton jButton1;
-    private JButton jButton2;
-    private JButton jButton3;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
+    private JButton ViewPaymentsButton;
+    private JButton RequestButton;
+    private JButton LogOutButton;
+    private JLabel WelcomeLabel;
+    private JLabel YourPersonalInfoLabel;
 }

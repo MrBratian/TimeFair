@@ -9,12 +9,12 @@ package timefair.gui;
  *
  * @author Notebook
  */
-public class RealizarSolicitud extends javax.swing.JPanel {
+public class NewRequest extends javax.swing.JPanel {
 
     /**
      * Creates new form Solicitudes
      */
-    public RealizarSolicitud() {
+    public NewRequest() {
         initComponents();
     }
 
