@@ -11,7 +11,9 @@ public class EmployeeMenu extends javax.swing.JFrame {
         });
     }
 
+    private JPanel cards;
     public EmployeeMenu() {
+        setTitle("Panel de Empleado");
         initComponents();
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int ancho = (int) (pantalla.width * 0.8);
@@ -19,30 +21,42 @@ public class EmployeeMenu extends javax.swing.JFrame {
         this.setSize(ancho, alto);
         this.setMinimumSize(new Dimension(800, 600));
         this.setLocationRelativeTo(null);
+        
+        cards = new JPanel(new CardLayout());
+        cards.add(MainPanel, "MAIN");
+        cards.add(new NewRequest(cards), "NR");
+        cards.add(new PaymentHistory(cards), "VP");
+
+        setContentPane(cards);
+        revalidate();
+        repaint();
     }
 
     private void initComponents() {
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(15, 15, 15, 15);
 
+        MainPanel = new javax.swing.JPanel();
+        WelcomeLabel = new javax.swing.JLabel();
+        
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new GridBagLayout());
+        
         // Mensaje superior izquierda
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.weightx = 1;
         gbc.fill = GridBagConstraints.NONE;
-        WelcomeLabel = new JLabel("Bienvenido de nuevo [USER]");
-        getContentPane().add(WelcomeLabel, gbc);
+        WelcomeLabel.setText("Bienvenido de nuevo [USER]");
+        MainPanel.add(WelcomeLabel, gbc);
 
         // Botón cerrar sesión a la derecha
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         gbc.weightx = 1;
         LogOutButton = new JButton("Cerrar sesión");
-        getContentPane().add(LogOutButton, gbc);
-        
+        MainPanel.add(WelcomeLabel, gbc);
         LogOutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LogOutButtonActionPerformed(evt);
@@ -58,22 +72,37 @@ public class EmployeeMenu extends javax.swing.JFrame {
         gbc.fill = GridBagConstraints.NONE;
 
         YourPersonalInfoLabel = new JLabel("Tu info personal:");
-        getContentPane().add(YourPersonalInfoLabel, gbc);
+        MainPanel.add(YourPersonalInfoLabel, gbc);
 
         gbc.gridy++;
         ViewPaymentsButton = new JButton("Ver historial de pagos");
-        getContentPane().add(ViewPaymentsButton, gbc);
+        MainPanel.add(ViewPaymentsButton, gbc);
+        ViewPaymentsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewPaymentsButtonActionPerformed(evt);
+            }
+        });
 
         gbc.gridy++;
         RequestButton = new JButton("Solicitar vacaciones o licencias");
-        getContentPane().add(RequestButton, gbc);
-
-        // Espaciado inferior para empujar hacia arriba todo
-        gbc.gridy++;
-        gbc.weighty = 1;
-        getContentPane().add(Box.createVerticalGlue(), gbc);
+        MainPanel.add(RequestButton, gbc);
+        RequestButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RequestButtonActionPerformed(evt);
+            }
+        });
 
         pack();
+    }
+    
+    private void ViewPaymentsButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        CardLayout cl = (CardLayout) cards.getLayout();
+        cl.show(cards, "VP");
+    }
+    
+    private void RequestButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        CardLayout cl = (CardLayout) cards.getLayout();
+        cl.show(cards, "NR");
     }
     
     private void LogOutButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +111,8 @@ public class EmployeeMenu extends javax.swing.JFrame {
             new Login().setVisible(true);
         });
     }
-
+    
+    private javax.swing.JPanel MainPanel;
     private JButton ViewPaymentsButton;
     private JButton RequestButton;
     private JButton LogOutButton;
