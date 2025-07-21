@@ -3,238 +3,123 @@ package timefair.gui;
 import java.awt.*;
 import javax.swing.*;
 
-public class AdminMenu extends javax.swing.JFrame {
-    
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new AdminMenu().setVisible(true);
-        });
-        }
-        
+public class AdminMenu extends JFrame {
+
     private JPanel cards;
+    private JPanel MainPanel;
+    private JLabel WelcomeLabel;
+    private JButton NewEmployeeButton;
+    private JButton EmployeeListButton;
+    private JButton RecordHoursButton;
+    private JButton PaymentHistoryButton;
+    private JButton CalcButton;
+    private JButton RequestListButton;
+    private JButton MakeReportButton;
+    private JButton LogOutButton;
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new AdminMenu().setVisible(true));
+    }
+
     public AdminMenu() {
         setTitle("Panel de Administrador");
         initComponents();
+
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-        int ancho = (int) (pantalla.width * 0.8);
-        int alto  = (int) (pantalla.height * 0.8);
+        int ancho = (int)(pantalla.width * 0.8);
+        int alto  = (int)(pantalla.height * 0.8);
         setSize(ancho, alto);
         setMinimumSize(new Dimension(800, 600));
         setLocationRelativeTo(null);
 
-        // Ahora sí: creamos el CardLayout
+        // Creamos CardLayout y agregamos los "cards"
         cards = new JPanel(new CardLayout());
-        cards.add(MainPanel, "MAIN");
+        cards.add(MainPanel,            "MAIN");
         cards.add(new CalcularNomina(cards), "CALC");
-        cards.add(new EmployeeList(cards), "EL");
-        cards.add(new NewEmployee(cards), "NE");
-        cards.add(new PaymentHistory(cards), "PH");
-        cards.add(new RecordHours(cards), "RH");
-        cards.add(new RequestList(cards), "RL");
+        cards.add(new EmployeeList(cards),   "EL");
+        cards.add(new NewEmployee(cards),    "NE");
+        cards.add(new PaymentHistory(cards),"PH");
+        cards.add(new RecordHours(cards),    "RH");
+        cards.add(new RequestList(cards),    "RL");
 
-        // Pintamos SOLO cards en el frame
+        // Ponemos sólo cards en el frame
         setContentPane(cards);
         revalidate();
         repaint();
+        pack();  // <— ¡al FINAL!
     }
-
 
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
-        
-        MainPanel = new javax.swing.JPanel();
-        WelcomeLabel = new javax.swing.JLabel();
-        NewEmployeeButton = new javax.swing.JButton();
-        EmployeeListButton = new javax.swing.JButton();
-        RecordHoursButton = new javax.swing.JButton();
-        PaymentHistoryButton = new javax.swing.JButton();
-        CalcButton = new javax.swing.JButton();
-        RequestListButton = new javax.swing.JButton();
-        MakeReportButton = new javax.swing.JButton();
-        LogOutButton = new javax.swing.JButton();
+        // 1) Crear componentes
+        MainPanel            = new JPanel(new GridBagLayout());  // <— importante
+        WelcomeLabel         = new JLabel("Bienvenido de nuevo [USER]");
+        LogOutButton         = new JButton("Cerrar sesión");
+        NewEmployeeButton    = new JButton("Registrar empleado nuevo");
+        EmployeeListButton   = new JButton("Ver lista de empleados");
+        RecordHoursButton    = new JButton("Registrar horas trabajadas");
+        PaymentHistoryButton = new JButton("Historial de pagos");
+        CalcButton           = new JButton("Calcular nómina");
+        RequestListButton    = new JButton("Solicitudes de licencias o vacaciones");
+        MakeReportButton     = new JButton("Generar reporte");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        // 2) Añadir a MainPanel con GridBagConstraints
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(15, 15, 15, 15);
 
-        WelcomeLabel.setText("Bienvenido de nuevo [USER]");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(40, 60, 0, 0);
-        MainPanel.add(WelcomeLabel, gridBagConstraints);
+        // Fila 0, col 0: etiqueta de bienvenida
+        gbc.gridx   = 0;
+        gbc.gridy   = 0;
+        gbc.gridwidth = 1;
+        gbc.anchor  = GridBagConstraints.FIRST_LINE_START;
+        MainPanel.add(WelcomeLabel, gbc);
 
-        
-        LogOutButton.setText("Cerrar sesion");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 205, 0, 60);
-        MainPanel.add(LogOutButton, gridBagConstraints);
-        LogOutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogOutButtonActionPerformed(evt);
-            }
+        // Fila 0, col 1: botón cerrar sesión
+        gbc.gridx   = 1;
+        gbc.anchor  = GridBagConstraints.FIRST_LINE_END;
+        MainPanel.add(LogOutButton, gbc);
+        LogOutButton.addActionListener(evt -> {
+            dispose();
+            SwingUtilities.invokeLater(() -> new Login().setVisible(true));
         });
 
-        NewEmployeeButton.setText("Registrar empleado nuevo"); 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 41;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(66, 100, 0, 0);
-        MainPanel.add(NewEmployeeButton, gridBagConstraints);
-        NewEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewEmployeeButtonActionPerformed(evt);
-            }
-        });
+        // Resto de botones, columna única centrada
+        gbc.gridx      = 0;
+        gbc.gridy      = 1;
+        gbc.gridwidth  = 2;
+        gbc.anchor     = GridBagConstraints.CENTER;
 
-        EmployeeListButton.setText("Ver lista de empleados");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 61;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 100, 0, 0);
-        MainPanel.add(EmployeeListButton, gridBagConstraints);
-        EmployeeListButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmployeeListButtonActionPerformed(evt);
-            }
-        });
+        MainPanel.add(NewEmployeeButton, gbc);
+        NewEmployeeButton.addActionListener(evt -> switchCard("NE"));
 
-        RecordHoursButton.setText("Registrar horas trabajadas");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 39;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(66, 65, 0, 0);
-        MainPanel.add(RecordHoursButton, gridBagConstraints);
-        RecordHoursButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RecordHoursButtonActionPerformed(evt);
-            }
-        });
+        gbc.gridy++;
+        MainPanel.add(EmployeeListButton, gbc);
+        EmployeeListButton.addActionListener(evt -> switchCard("EL"));
 
-        PaymentHistoryButton.setText("Historial de pagos");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 83;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 65, 0, 0);
-        MainPanel.add(PaymentHistoryButton, gridBagConstraints);
-        PaymentHistoryButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PaymentHistoryButtonActionPerformed(evt);
-            }
-        });
+        gbc.gridy++;
+        MainPanel.add(RecordHoursButton, gbc);
+        RecordHoursButton.addActionListener(evt -> switchCard("RH"));
 
-        CalcButton.setText("Calcular nomina");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 93;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(47, 100, 0, 0);
-        MainPanel.add(CalcButton, gridBagConstraints);
-        CalcButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CalcButtonActionPerformed(evt);
-            }
-        });
+        gbc.gridy++;
+        MainPanel.add(PaymentHistoryButton, gbc);
+        PaymentHistoryButton.addActionListener(evt -> switchCard("PH"));
 
-        RequestListButton.setText("Solicitudes de licencias o vacaciones");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 100, 53, 0);
-        MainPanel.add(RequestListButton, gridBagConstraints);
-        RequestListButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RequestListButtonActionPerformed(evt);
-            }
-        });
+        gbc.gridy++;
+        MainPanel.add(CalcButton, gbc);
+        CalcButton.addActionListener(evt -> switchCard("CALC"));
 
-        MakeReportButton.setText("Generar reporte");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 89;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(57, 65, 0, 0);
-        MainPanel.add(MakeReportButton, gridBagConstraints);
-        MakeReportButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MakeReportButtonActionPerformed(evt);
-            }
-        });
+        gbc.gridy++;
+        MainPanel.add(RequestListButton, gbc);
+        RequestListButton.addActionListener(evt -> switchCard("RL"));
 
-        pack();
+        gbc.gridy++;
+        MainPanel.add(MakeReportButton, gbc);
+        MakeReportButton.addActionListener(evt -> {
+            // implementa generación de reporte...
+        });
     }
-    
-    private void NewEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    private void switchCard(String name) {
         CardLayout cl = (CardLayout) cards.getLayout();
-        cl.show(cards, "NE");
+        cl.show(cards, name);
     }
-
-    private void EmployeeListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        CardLayout cl = (CardLayout) cards.getLayout();
-        cl.show(cards, "EL");
-    }
-    
-    private void RecordHoursButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        CardLayout cl = (CardLayout) cards.getLayout();
-        cl.show(cards, "RH");
-    }
-    
-    private void PaymentHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        CardLayout cl = (CardLayout) cards.getLayout();
-        cl.show(cards, "PH");
-    }
-    
-    private void CalcButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        CardLayout cl = (CardLayout) cards.getLayout();
-        cl.show(cards, "CALC");
-    }
-    
-    private void RequestListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        CardLayout cl = (CardLayout) cards.getLayout();
-        cl.show(cards, "RL");
-    }
-    
-    private void MakeReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-    }
-    
-    private void LogOutButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        dispose();
-        SwingUtilities.invokeLater(() -> {
-            new Login().setVisible(true);
-        });
-    }
-    
-    private javax.swing.JPanel MainPanel;
-    private javax.swing.JLabel WelcomeLabel;
-    private javax.swing.JButton NewEmployeeButton;
-    private javax.swing.JButton EmployeeListButton;
-    private javax.swing.JButton RecordHoursButton;
-    private javax.swing.JButton PaymentHistoryButton;
-    private javax.swing.JButton CalcButton;
-    private javax.swing.JButton RequestListButton;
-    private javax.swing.JButton MakeReportButton;
-    private javax.swing.JButton LogOutButton;
 }

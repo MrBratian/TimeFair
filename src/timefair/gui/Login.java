@@ -75,20 +75,20 @@ public class Login extends javax.swing.JFrame {
         try {
             String rutaBD = "jdbc:ucanaccess://DB.accdb";
             Connection conn = DriverManager.getConnection(rutaBD);
-            String sql = "SELECT rol FROM Usuarios WHERE correo=? AND contraseña=?";
+            String sql = "SELECT Rol FROM Usuarios WHERE Correo electronico=? AND Contraseña=?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, correo);
             pst.setString(2, contrasena);
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
-                String rol = rs.getString("rol");
+                String rol = rs.getString("Rol");
 
                 this.dispose(); // Cierra la ventana de login
 
-                if (rol.equalsIgnoreCase("admin")) {
+                if (rol.equalsIgnoreCase("Administrador")) {
                     new AdminMenu().setVisible(true);
-                } else if (rol.equalsIgnoreCase("empleado")) {
+                } else if (rol.equalsIgnoreCase("Empleado")) {
                     new EmployeeMenu().setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(this, "Rol no reconocido.");
@@ -104,10 +104,10 @@ public class Login extends javax.swing.JFrame {
         }
     }
 
-    private javax.swing.JPasswordField PasswordField;
-    private javax.swing.JTextField emailField;
-    private javax.swing.JLabel emailLabel;
-    private javax.swing.JButton LogInButton;
-    private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel welcomeLabel;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField emailField;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JPasswordField PasswordField;
+    private javax.swing.JButton LogInButton;
 }

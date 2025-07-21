@@ -15,13 +15,14 @@ public class EmployeeMenu extends javax.swing.JFrame {
     public EmployeeMenu() {
         setTitle("Panel de Empleado");
         initComponents();
+
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int ancho = (int) (pantalla.width * 0.8);
         int alto = (int) (pantalla.height * 0.8);
         this.setSize(ancho, alto);
         this.setMinimumSize(new Dimension(800, 600));
         this.setLocationRelativeTo(null);
-        
+
         cards = new JPanel(new CardLayout());
         cards.add(MainPanel, "MAIN");
         cards.add(new NewRequest(cards), "NR");
@@ -30,38 +31,34 @@ public class EmployeeMenu extends javax.swing.JFrame {
         setContentPane(cards);
         revalidate();
         repaint();
+        pack(); // ✅ debe ir aquí al final
     }
+
 
     private void initComponents() {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(15, 15, 15, 15);
 
-        MainPanel = new javax.swing.JPanel();
-        WelcomeLabel = new javax.swing.JLabel();
-        
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new GridBagLayout());
-        
+        MainPanel = new JPanel(new GridBagLayout()); // ✅ Establece layout
+        WelcomeLabel = new JLabel("Bienvenido de nuevo [USER]");
+        LogOutButton = new JButton("Cerrar sesión");
+        YourPersonalInfoLabel = new JLabel("Tu info personal:");
+        ViewPaymentsButton = new JButton("Ver historial de pagos");
+        RequestButton = new JButton("Solicitar vacaciones o licencias");
+
         // Mensaje superior izquierda
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.weightx = 1;
         gbc.fill = GridBagConstraints.NONE;
-        WelcomeLabel.setText("Bienvenido de nuevo [USER]");
         MainPanel.add(WelcomeLabel, gbc);
 
         // Botón cerrar sesión a la derecha
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        gbc.weightx = 1;
-        LogOutButton = new JButton("Cerrar sesión");
-        MainPanel.add(WelcomeLabel, gbc);
-        LogOutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogOutButtonActionPerformed(evt);
-            }
-        });
+        MainPanel.add(LogOutButton, gbc);
+        LogOutButton.addActionListener(evt -> LogOutButtonActionPerformed(evt));
 
         // Reset de constraints para lo demás
         gbc.gridx = 0;
@@ -71,29 +68,17 @@ public class EmployeeMenu extends javax.swing.JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
 
-        YourPersonalInfoLabel = new JLabel("Tu info personal:");
         MainPanel.add(YourPersonalInfoLabel, gbc);
 
         gbc.gridy++;
-        ViewPaymentsButton = new JButton("Ver historial de pagos");
         MainPanel.add(ViewPaymentsButton, gbc);
-        ViewPaymentsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewPaymentsButtonActionPerformed(evt);
-            }
-        });
+        ViewPaymentsButton.addActionListener(evt -> ViewPaymentsButtonActionPerformed(evt));
 
         gbc.gridy++;
-        RequestButton = new JButton("Solicitar vacaciones o licencias");
         MainPanel.add(RequestButton, gbc);
-        RequestButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RequestButtonActionPerformed(evt);
-            }
-        });
+        RequestButton.addActionListener(evt -> RequestButtonActionPerformed(evt));
+}
 
-        pack();
-    }
     
     private void ViewPaymentsButtonActionPerformed(java.awt.event.ActionEvent evt) {
         CardLayout cl = (CardLayout) cards.getLayout();
