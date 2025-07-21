@@ -63,44 +63,45 @@ public class Login extends javax.swing.JFrame {
         pack();
 }
 
-    private void LogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String correo = emailField.getText();
-        String contrasena = new String(PasswordField.getPassword());
+    private void LogInButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        String correo    = emailField.getText().trim();
+        String contrasen = new String(PasswordField.getPassword());
 
-        if (correo.isEmpty() || contrasena.isEmpty()) {
+        if (correo.isEmpty() || contrasen.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos.");
             return;
         }
 
-        try {
-            String rutaBD = "jdbc:ucanaccess://DB.accdb";
-            Connection conn = DriverManager.getConnection(rutaBD);
-            String sql = "SELECT Rol FROM Usuarios WHERE Correo electronico=? AND Contraseña=?";
-            PreparedStatement pst = conn.prepareStatement(sql);
+        Connection conn = timefair.db.AccessConection.conectar();
+        if (conn == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos.");
+            return;
+        }
+
+        String sql = "SELECT Rol FROM Usuarios "
+                   + "WHERE [Correo electronico]=? AND Contraseña=?";
+        try (PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setString(1, correo);
-            pst.setString(2, contrasena);
-            ResultSet rs = pst.executeQuery();
+            pst.setString(2, contrasen);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    String rol = rs.getString("Rol");
+                    this.dispose();
 
-            if (rs.next()) {
-                String rol = rs.getString("Rol");
-
-                this.dispose(); // Cierra la ventana de login
-
-                if (rol.equalsIgnoreCase("Administrador")) {
-                    new AdminMenu().setVisible(true);
-                } else if (rol.equalsIgnoreCase("Empleado")) {
-                    new EmployeeMenu().setVisible(true);
+                    if ("Administrador".equalsIgnoreCase(rol)) {
+                        new AdminMenu().setVisible(true);
+                    } else if ("Empleado".equalsIgnoreCase(rol)) {
+                        new EmployeeMenu().setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Rol no reconocido: " + rol);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Rol no reconocido.");
+                    JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.");
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.");
             }
-
-            conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos.");
+            JOptionPane.showMessageDialog(this, "Error al ejecutar la consulta: " + e.getMessage());
         }
     }
 
