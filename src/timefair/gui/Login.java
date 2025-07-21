@@ -88,9 +88,9 @@ public class Login extends javax.swing.JFrame {
                     String rol = rs.getString("Rol");
                     this.dispose();
 
-                    if ("Administrador".equalsIgnoreCase(rol)) {
+                    if ("1".equalsIgnoreCase(rol)) {
                         new AdminMenu().setVisible(true);
-                    } else if ("Empleado".equalsIgnoreCase(rol)) {
+                    } else if ("2".equalsIgnoreCase(rol)) {
                         new EmployeeMenu().setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(this, "Rol no reconocido: " + rol);
@@ -99,7 +99,8 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.");
                 }
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al ejecutar la consulta: " + e.getMessage());
         }
