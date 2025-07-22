@@ -39,8 +39,8 @@ public class EmployeeMenu extends javax.swing.JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(15, 15, 15, 15);
 
-        MainPanel = new JPanel(new GridBagLayout()); // ✅ Establece layout
-        WelcomeLabel = new JLabel("Bienvenido de nuevo [USER]");
+        MainPanel = new JPanel(new GridBagLayout());
+        WelcomeLabel = new JLabel("Bienvenido de nuevo");
         LogOutButton = new JButton("Cerrar sesión");
         YourPersonalInfoLabel = new JLabel("Tu info personal:");
         ViewPaymentsButton = new JButton("Ver historial de pagos");

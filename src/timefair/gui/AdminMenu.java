@@ -14,7 +14,6 @@ public class AdminMenu extends JFrame {
     private JButton PaymentHistoryButton;
     private JButton CalcButton;
     private JButton RequestListButton;
-    private JButton MakeReportButton;
     private JButton LogOutButton;
 
     public static void main(String[] args) {
@@ -52,7 +51,7 @@ public class AdminMenu extends JFrame {
     private void initComponents() {
         // 1) Crear componentes
         MainPanel            = new JPanel(new GridBagLayout());  // <— importante
-        WelcomeLabel         = new JLabel("Bienvenido de nuevo [USER]");
+        WelcomeLabel         = new JLabel("Bienvenido de nuevo");
         LogOutButton         = new JButton("Cerrar sesión");
         NewEmployeeButton    = new JButton("Registrar empleado nuevo");
         EmployeeListButton   = new JButton("Ver lista de empleados");
@@ -60,7 +59,6 @@ public class AdminMenu extends JFrame {
         PaymentHistoryButton = new JButton("Historial de pagos");
         CalcButton           = new JButton("Calcular nómina");
         RequestListButton    = new JButton("Solicitudes de licencias o vacaciones");
-        MakeReportButton     = new JButton("Generar reporte");
 
         // 2) Añadir a MainPanel con GridBagConstraints
         GridBagConstraints gbc = new GridBagConstraints();
@@ -110,12 +108,6 @@ public class AdminMenu extends JFrame {
         gbc.gridy++;
         MainPanel.add(RequestListButton, gbc);
         RequestListButton.addActionListener(evt -> switchCard("RL"));
-
-        gbc.gridy++;
-        MainPanel.add(MakeReportButton, gbc);
-        MakeReportButton.addActionListener(evt -> {
-            // implementa generación de reporte...
-        });
     }
 
     private void switchCard(String name) {
