@@ -42,7 +42,6 @@ public class EmployeeMenu extends javax.swing.JFrame {
         MainPanel = new JPanel(new GridBagLayout());
         WelcomeLabel = new JLabel("Bienvenido de nuevo");
         LogOutButton = new JButton("Cerrar sesión");
-        YourPersonalInfoLabel = new JLabel("Tu info personal:");
         ViewPaymentsButton = new JButton("Ver historial de pagos");
         RequestButton = new JButton("Solicitar vacaciones o licencias");
 
@@ -67,8 +66,6 @@ public class EmployeeMenu extends javax.swing.JFrame {
         gbc.weightx = 0;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
-
-        MainPanel.add(YourPersonalInfoLabel, gbc);
 
         gbc.gridy++;
         MainPanel.add(ViewPaymentsButton, gbc);
@@ -102,5 +99,4 @@ public class EmployeeMenu extends javax.swing.JFrame {
     private JButton RequestButton;
     private JButton LogOutButton;
     private JLabel WelcomeLabel;
-    private JLabel YourPersonalInfoLabel;
 }
