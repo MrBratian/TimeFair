@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
     public Login() {
+        setTitle("TimeFair - Inicio de sesion");
         initComponents();
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int ancho = (int) (pantalla.width * 0.8);
