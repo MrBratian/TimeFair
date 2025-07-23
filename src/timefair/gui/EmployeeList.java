@@ -81,31 +81,44 @@ public class EmployeeList extends javax.swing.JPanel {
     }//GEN-LAST:event_GoBackButtonActionPerformed
 
     private void DeleteEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteEmployeeButtonActionPerformed
-        int fila = jTable1.getSelectedRow();
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(this, "Selecciona un empleado para eliminar.");
+    int fila = jTable1.getSelectedRow();
+    if (fila == -1) {
+        JOptionPane.showMessageDialog(this, "Selecciona un empleado para eliminar.");
+        return;
+    }
+
+    int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar este empleado?", "Confirmar", JOptionPane.YES_NO_OPTION);
+    if (confirm != JOptionPane.YES_OPTION) return;
+
+    int id = (int) jTable1.getValueAt(fila, 0);
+
+    Connection conn = null;
+    PreparedStatement pst = null;
+
+    try {
+        conn = timefair.db.AccessConection.conectar(); // 💡 Asegúrate que este método NO esté retornando null
+
+        if (conn == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo establecer la conexión con la base de datos.");
             return;
         }
 
-        int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar este empleado?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (confirm != JOptionPane.YES_OPTION) return;
+        pst = conn.prepareStatement("UPDATE Empleados SET Eliminado = true WHERE ID = ?");
+        pst.setInt(1, id);
+        pst.executeUpdate();
 
-        int id = (int) jTable1.getValueAt(fila, 0);
+        JOptionPane.showMessageDialog(this, "Empleado eliminado con éxito.");
 
-        try {
-            Connection conn = timefair.db.AccessConection.conectar();
-            String sql = "DELETE FROM Empleados WHERE ID=?";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, id);
-            pst.executeUpdate();
-            conn.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al eliminar el empleado: " + e.getMessage());
+    } finally {
+        try { if (pst != null) pst.close(); } catch (Exception e) {}
+        try { if (conn != null) conn.close(); } catch (Exception e) {}
+    }
 
-            JOptionPane.showMessageDialog(this, "Empleado eliminado con éxito.");
-            cargarEmpleadosDesdeBD();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al eliminar el empleado.");
-        }
+    // Cargar los empleados después de cerrar la conexión
+    cargarEmpleadosDesdeBD();
     }//GEN-LAST:event_DeleteEmployeeButtonActionPerformed
 
     private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
@@ -139,33 +152,41 @@ public class EmployeeList extends javax.swing.JPanel {
     }//GEN-LAST:event_ShowDetailsButtonActionPerformed
 
     private void cargarEmpleadosDesdeBD() {
-        try {
-            Connection conn = timefair.db.AccessConection.conectar();
-            String sql = "SELECT ID, Nombre, TipoContrato FROM Empleados";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
 
-            // Crear modelo de tabla
+        try {
+            conn = timefair.db.AccessConection.conectar(); // 👈 crear nueva conexión SIEMPRE
+            String sql = "SELECT ID, Nombre, TipoContrato FROM Empleados WHERE Eliminado = false";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("ID");
             modelo.addColumn("Nombre");
             modelo.addColumn("Tipo de Contrato");
 
             while (rs.next()) {
-                Object[] fila = new Object[3];
-                fila[0] = rs.getInt("ID");
-                fila[1] = rs.getString("Nombre");
-                fila[2] = rs.getString("TipoContrato");
-                modelo.addRow(fila);
+                modelo.addRow(new Object[]{
+                    rs.getInt("ID"),
+                    rs.getString("Nombre"),
+                    rs.getString("TipoContrato")
+                });
             }
 
-            jTable1.setModel(modelo);
-            conn.close();
-        } catch (SQLException e) {
+            jTable1.setModel(modelo); // tu JTable
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar empleados: " + e.getMessage());
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al cargar empleados desde la base de datos.");
+        } finally {
+            try { if (rs != null) rs.close(); } catch (Exception e) {}
+            try { if (pst != null) pst.close(); } catch (Exception e) {}
+            try { if (conn != null) conn.close(); } catch (Exception e) {} // 👈 cerrarla aquí
         }
     }
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DeleteEmployeeButton;
