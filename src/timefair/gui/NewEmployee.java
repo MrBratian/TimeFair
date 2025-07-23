@@ -1,9 +1,7 @@
 package timefair.gui;
 
-import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 
 public class NewEmployee extends javax.swing.JPanel {
     private JPanel cardsContainer;

@@ -158,7 +158,10 @@ public class EmployeeList extends javax.swing.JPanel {
 
         try {
             conn = timefair.db.AccessConection.conectar(); // 👈 crear nueva conexión SIEMPRE
-            String sql = "SELECT ID, Nombre, TipoContrato FROM Empleados WHERE Eliminado = false";
+            String sql = "SELECT E.ID, E.Nombre, T.Nombre AS TipoContrato " +
+             "FROM Empleados E " +
+             "JOIN [Tipos de Contrato] T ON E.TipoContrato = T.ID " +
+             "WHERE E.Eliminado = false";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
 
@@ -169,10 +172,10 @@ public class EmployeeList extends javax.swing.JPanel {
 
             while (rs.next()) {
                 modelo.addRow(new Object[]{
-                    rs.getInt("ID"),
-                    rs.getString("Nombre"),
-                    rs.getString("TipoContrato")
-                });
+                rs.getInt("ID"),
+                rs.getString("Nombre"),
+                rs.getString("TipoContrato")
+            });
             }
 
             jTable1.setModel(modelo); // tu JTable
