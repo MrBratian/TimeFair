@@ -1,9 +1,9 @@
 package timefair.gui;
 
-import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 public class EmployeeList extends javax.swing.JPanel {
     private JPanel cardsContainer;
@@ -11,6 +11,7 @@ public class EmployeeList extends javax.swing.JPanel {
     public EmployeeList(JPanel cardsContainer) {
         this.cardsContainer = cardsContainer;
         initComponents();
+        cargarEmpleadosDesdeBD();
     }
 
     @SuppressWarnings("unchecked")
@@ -64,7 +65,35 @@ public class EmployeeList extends javax.swing.JPanel {
         cl.show(cardsContainer, "MAIN");
     }//GEN-LAST:event_GoBackButtonActionPerformed
 
+    private void cargarEmpleadosDesdeBD() {
+        try {
+            Connection conn = timefair.db.AccessConection.conectar();
+            String sql = "SELECT ID, Nombre, TipoContrato FROM Empleados";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
 
+            // Crear modelo de tabla
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("ID");
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Tipo de Contrato");
+
+            while (rs.next()) {
+                Object[] fila = new Object[3];
+                fila[0] = rs.getInt("ID");
+                fila[1] = rs.getString("Nombre");
+                fila[2] = rs.getString("TipoContrato");
+                modelo.addRow(fila);
+            }
+
+            jTable1.setModel(modelo);
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al cargar empleados desde la base de datos.");
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GoBackButton;
     private javax.swing.JButton jButton1;

@@ -61,7 +61,7 @@ public class RequestList extends javax.swing.JPanel {
         cl.show(cardsContainer, "MAIN");
     }//GEN-LAST:event_GoBackButtonActionPerformed
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GoBackButton;
     private javax.swing.JButton jButton1;
