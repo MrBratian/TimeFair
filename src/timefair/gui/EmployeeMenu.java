@@ -25,7 +25,7 @@ public class EmployeeMenu extends javax.swing.JFrame {
 
         cards = new JPanel(new CardLayout());
         cards.add(MainPanel, "MAIN");
-        cards.add(new NewRequest(cards), "NR");
+        cards.add(new MyRequests(cards), "NR");
         cards.add(new PaymentHistory(cards), "VP");
 
         setContentPane(cards);
@@ -43,7 +43,7 @@ public class EmployeeMenu extends javax.swing.JFrame {
         WelcomeLabel = new JLabel("Bienvenido de nuevo");
         LogOutButton = new JButton("Cerrar sesión");
         ViewPaymentsButton = new JButton("Ver historial de pagos");
-        RequestButton = new JButton("Solicitar vacaciones o licencias");
+        RequestButton = new JButton("Ver mis solicitudes");
 
         // Mensaje superior izquierda
         gbc.gridx = 0;

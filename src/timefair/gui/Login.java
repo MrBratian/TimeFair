@@ -79,15 +79,33 @@ public class Login extends javax.swing.JFrame {
             return;
         }
 
-        String sql = "SELECT Rol FROM Usuarios "
-                   + "WHERE [Correo electronico]=? AND Contraseña=?";
+        String sql = "SELECT id, Rol FROM Usuarios WHERE [Correo electronico]=? AND Contraseña=?";
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setString(1, correo);
             pst.setString(2, contrasen);
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
+                    int idUsuario = rs.getInt("id");
                     String rol = rs.getString("Rol");
-                    this.dispose();
+
+                    if ("2".equalsIgnoreCase(rol)) { // Empleado
+                        // Obtener el id del empleado asociado al usuario
+                        String sqlEmp = "SELECT id FROM Empleados WHERE id_usuario=?";
+                        try (PreparedStatement pstEmp = conn.prepareStatement(sqlEmp)) {
+                            pstEmp.setInt(1, idUsuario);
+                            try (ResultSet rsEmp = pstEmp.executeQuery()) {
+                                if (rsEmp.next()) {
+                                    int idEmpleado = rsEmp.getInt("id");
+                                    timefair.db.auth.setIdEmpleado(idEmpleado); // Guardar
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "No se encontró empleado asociado.");
+                                    return;
+                                }
+                            }
+                        }
+                    }
+
+                    this.dispose(); // cerrar login
 
                     if ("1".equalsIgnoreCase(rol)) {
                         new AdminMenu().setVisible(true);
@@ -100,12 +118,12 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.");
                 }
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al ejecutar la consulta: " + e.getMessage());
         }
     }
+
 
     private javax.swing.JLabel welcomeLabel;
     private javax.swing.JLabel emailLabel;
