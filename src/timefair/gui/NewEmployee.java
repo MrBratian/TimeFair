@@ -119,6 +119,10 @@ public class NewEmployee extends javax.swing.JPanel {
             pst.executeUpdate();
 
             JOptionPane.showMessageDialog(this, "Empleado registrado correctamente.");
+            
+            if (listener != null) {
+                listener.onEmpleadoRegistrado();
+            }
 
             // Limpiar campos
             NameField.setText("");
@@ -186,7 +190,16 @@ public class NewEmployee extends javax.swing.JPanel {
             return nombre;
         }
     }
+    
+    public interface EmpleadoRegistradoListener {
+    void onEmpleadoRegistrado();
+}
+    
+    public void setEmpleadoRegistradoListener(EmpleadoRegistradoListener listener) {
+        this.listener = listener;
+    }
 
+    private EmpleadoRegistradoListener listener;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField BonoField;
     private javax.swing.JTextField CedulaField;

@@ -190,6 +190,9 @@ public class EmployeeList extends javax.swing.JPanel {
         }
     }
 
+    public void recargarListaEmpleados() {
+        cargarEmpleadosDesdeBD();  // este sigue siendo privado
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DeleteEmployeeButton;

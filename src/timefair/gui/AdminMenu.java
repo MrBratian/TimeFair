@@ -15,6 +15,9 @@ public class AdminMenu extends JFrame {
     private JButton CalcButton;
     private JButton RequestListButton;
     private JButton LogOutButton;
+    private EmployeeList empList;
+    private NewEmployee newEmpPanel;
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new AdminMenu().setVisible(true));
@@ -23,7 +26,7 @@ public class AdminMenu extends JFrame {
     public AdminMenu() {
         setTitle("Panel de Administrador");
         initComponents();
-
+        
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int ancho = (int)(pantalla.width * 0.8);
         int alto  = (int)(pantalla.height * 0.8);
@@ -31,22 +34,29 @@ public class AdminMenu extends JFrame {
         setMinimumSize(new Dimension(800, 600));
         setLocationRelativeTo(null);
 
-        // Creamos CardLayout y agregamos los "cards"
         cards = new JPanel(new CardLayout());
-        cards.add(MainPanel,            "MAIN");
-        cards.add(new CalcularNomina(cards), "CALC");
-        cards.add(new EmployeeList(cards),   "EL");
-        cards.add(new NewEmployee(cards),    "NE");
-        cards.add(new PaymentHistory(cards),"PH");
-        cards.add(new RecordHours(cards),    "RH");
-        cards.add(new RequestList(cards),    "RL");
+        cards.add(MainPanel, "MAIN");
 
-        // Ponemos sólo cards en el frame
+        EmployeeList empList = new EmployeeList(cards);
+        NewEmployee newEmpPanel = new NewEmployee(cards);
+
+        newEmpPanel.setEmpleadoRegistradoListener(() -> {
+            empList.recargarListaEmpleados();
+        });
+
+        cards.add(empList, "EL");
+        cards.add(newEmpPanel, "NE");
+        cards.add(new CalcularNomina(cards), "CALC");
+        cards.add(new PaymentHistory(cards), "PH");
+        cards.add(new RecordHours(cards), "RH");
+        cards.add(new RequestList(cards), "RL");
+
         setContentPane(cards);
         revalidate();
         repaint();
-        pack();  // <— ¡al FINAL!
+        pack();
     }
+
 
     private void initComponents() {
         // 1) Crear componentes
