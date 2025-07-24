@@ -123,14 +123,13 @@ public class RecordHours extends javax.swing.JPanel {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
-                jComboBoxEmpleadosPorHoras.addItem(new EmpleadoItem(id, nombre)); // Clase auxiliar
+                jComboBoxEmpleadosPorHoras.addItem(new EmpleadoItem(id, nombre));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
     
     class EmpleadoItem {
         int id;

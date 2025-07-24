@@ -5,9 +5,9 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
 
-public class PaymentHistory extends javax.swing.JPanel {
+public class MyPaymentHistory extends javax.swing.JPanel {
     private JPanel cardsContainer;
-    public PaymentHistory(JPanel cardsContainer) {
+    public MyPaymentHistory(JPanel cardsContainer) {
         this.cardsContainer = cardsContainer;
         initComponents();
     }
@@ -16,20 +16,11 @@ public class PaymentHistory extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         GoBackButton = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -60,14 +51,9 @@ public class PaymentHistory extends javax.swing.JPanel {
         cl.show(cardsContainer, "MAIN");
     }//GEN-LAST:event_GoBackButtonActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here: ocultar para usuario empleado
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GoBackButton;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
