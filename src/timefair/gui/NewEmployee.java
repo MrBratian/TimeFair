@@ -80,7 +80,7 @@ public class NewEmployee extends javax.swing.JPanel {
 
     private void GoBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackButtonActionPerformed
         CardLayout cl = (CardLayout) cardsContainer.getLayout();
-        cl.show(cardsContainer, "MAIN");
+        cl.show(cardsContainer, "EL");
     }//GEN-LAST:event_GoBackButtonActionPerformed
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed

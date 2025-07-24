@@ -8,16 +8,12 @@ public class AdminMenu extends JFrame {
     private JPanel cards;
     private JPanel MainPanel;
     private JLabel WelcomeLabel;
-    private JButton NewEmployeeButton;
     private JButton EmployeeListButton;
     private JButton RecordHoursButton;
     private JButton PaymentHistoryButton;
     private JButton CalcButton;
     private JButton RequestListButton;
     private JButton LogOutButton;
-    private EmployeeList empList;
-    private NewEmployee newEmpPanel;
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new AdminMenu().setVisible(true));
@@ -44,8 +40,8 @@ public class AdminMenu extends JFrame {
             empList.recargarListaEmpleados();
         });
 
-        cards.add(empList, "EL");
-        cards.add(newEmpPanel, "NE");
+        cards.add(new EmployeeList(cards), "EL");
+        cards.add(new NewEmployee(cards), "NE");
         cards.add(new CalcularNomina(cards), "CALC");
         cards.add(new PaymentHistory(cards), "PH");
         cards.add(new RecordHours(cards), "RH");
@@ -63,7 +59,6 @@ public class AdminMenu extends JFrame {
         MainPanel            = new JPanel(new GridBagLayout());  // <— importante
         WelcomeLabel         = new JLabel("Bienvenido de nuevo");
         LogOutButton         = new JButton("Cerrar sesión");
-        NewEmployeeButton    = new JButton("Registrar empleado nuevo");
         EmployeeListButton   = new JButton("Ver lista de empleados");
         RecordHoursButton    = new JButton("Registrar horas trabajadas");
         PaymentHistoryButton = new JButton("Historial de pagos");
@@ -95,9 +90,6 @@ public class AdminMenu extends JFrame {
         gbc.gridy      = 1;
         gbc.gridwidth  = 2;
         gbc.anchor     = GridBagConstraints.CENTER;
-
-        MainPanel.add(NewEmployeeButton, gbc);
-        NewEmployeeButton.addActionListener(evt -> switchCard("NE"));
 
         gbc.gridy++;
         MainPanel.add(EmployeeListButton, gbc);
