@@ -31,17 +31,14 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="90" y="120" width="-1" height="-1"/>
+          <AbsoluteConstraints x="300" y="60" width="110" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldHorasTrabajadas">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Horas Trabajadas"/>
-      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="270" y="120" width="110" height="-1"/>
+          <AbsoluteConstraints x="300" y="150" width="110" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -49,9 +46,12 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Registrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRegistrarActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="450" y="120" width="-1" height="-1"/>
+          <AbsoluteConstraints x="230" y="200" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -65,6 +65,43 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="50" y="40" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="300" y="100" width="110" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Empleado:"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="200" y="60" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fecha trabajada:"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="170" y="100" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Horas trabajadas:"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="170" y="150" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
