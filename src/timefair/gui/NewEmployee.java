@@ -184,7 +184,6 @@ public class NewEmployee extends javax.swing.JPanel {
             return nombre;
         }
 
-        // Esto es lo que se mostrará en el JComboBox
         @Override
         public String toString() {
             return nombre;
@@ -192,8 +191,8 @@ public class NewEmployee extends javax.swing.JPanel {
     }
     
     public interface EmpleadoRegistradoListener {
-    void onEmpleadoRegistrado();
-}
+        void onEmpleadoRegistrado();
+    }
     
     public void setEmpleadoRegistradoListener(EmpleadoRegistradoListener listener) {
         this.listener = listener;

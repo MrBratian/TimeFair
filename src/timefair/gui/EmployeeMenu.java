@@ -25,13 +25,17 @@ public class EmployeeMenu extends javax.swing.JFrame {
 
         cards = new JPanel(new CardLayout());
         cards.add(MainPanel, "MAIN");
-        cards.add(new MyRequests(cards), "NR");
         cards.add(new PaymentHistory(cards), "VP");
+        MyRequests mrPanel = new MyRequests(cards);
+        cards.add(mrPanel, "MR");
+        NewRequest newRequestPanel = new NewRequest(cards, mrPanel);
+        cards.add(newRequestPanel, "NR");
+
 
         setContentPane(cards);
         revalidate();
         repaint();
-        pack(); // ✅ debe ir aquí al final
+        pack(); 
     }
 
 
@@ -84,7 +88,7 @@ public class EmployeeMenu extends javax.swing.JFrame {
     
     private void RequestButtonActionPerformed(java.awt.event.ActionEvent evt) {
         CardLayout cl = (CardLayout) cards.getLayout();
-        cl.show(cards, "NR");
+        cl.show(cards, "MR");
     }
     
     private void LogOutButtonActionPerformed(java.awt.event.ActionEvent evt) {

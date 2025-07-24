@@ -124,7 +124,6 @@ public class Login extends javax.swing.JFrame {
         }
     }
 
-
     private javax.swing.JLabel welcomeLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailField;
